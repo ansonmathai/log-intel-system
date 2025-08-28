@@ -1,0 +1,9 @@
+# .gitignore
+*.log
+*.out
+*.exe
+vendor/
+bin/
+.env
+__pycache__/
+*.DS_Store
