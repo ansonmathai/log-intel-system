@@ -7,7 +7,7 @@ import (
 )
 
 type LogEntry struct {
-	Timestamp time.Timestamp
+	Timestamp time.Time
 	Category string
 	Amount int
 	Note string
@@ -29,7 +29,7 @@ func GenerateLog() LogEntry {
 }
 
 func FormatLog(entry LogEntry) string {
-	return fmt.sprintf("%s\t%s\t₹%d\t%s\t%s",
+	return fmt.Sprintf("%s\t%s\t₹%d\t%s\t%s",
 			entry.Timestamp.Format(time.RFC3339),
 			entry.Category,
 			entry.Amount,

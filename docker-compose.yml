@@ -29,25 +29,30 @@ services:
 
   producer:
     build:
-      context: ./cmd/producer
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.producer
     container_name: producer
     depends_on:
       kafka:
         condition: service_healthy
     environment:
       KAFKA_BROKER: kafka:9092
+      KAFKA_TOPIC: logs
+      PRODUCER_MODE: stream
+      LOG_INTERVAL_MS: 2000
 
   consumer:
     build:
-      context: ./cmd/consumer
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile.consumer
     container_name: consumer
     depends_on:
       kafka:
         condition: service_healthy
     environment:
       KAFKA_BROKER: kafka:9092
+      KAFKA_TOPIC: logs
+      KAFKA_GROUP: log-consumer-group
 
   kafdrop:
     image: obsidiandynamics/kafdrop
